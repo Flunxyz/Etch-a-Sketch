@@ -11,20 +11,38 @@ and fill the html div.
 
 The event
 
-
-
 */
+
+
 const body = document.querySelector('body');
 const container = document.querySelector('#container');
+const button = document.createElement('button');
+
+
+button.textContent = 'Change grid amount';
+button.addEventListener ('click', changeGrid);
+body.appendChild(button);
 body.appendChild(container);
+
+function changeGrid (){
+    let rows = prompt('How many rows?');
+    console.log(Number(rows));
+}
+
+
+
 
 for(let i = 0; i < 256; i++) {
     const divs = document.createElement('div');
     divs.className = 'divs'
-    
+    divs.addEventListener('mouseover', ((touch) => divs.style.backgroundColor = 'white'));
     container.appendChild(divs);
-    
 }
+
+
+
+
+
 
 
 
