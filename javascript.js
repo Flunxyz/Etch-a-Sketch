@@ -10,41 +10,54 @@ The divs that have been created inside of the html div should all be equally siz
 and fill the html div.
 
 The event
+When the mouse is on one of the divs, change the div background color.
+
+Create a button that can be clicked.
+When it is clicket, then the grids will dissappear and the person will be asked for a propmt
+to select the amount of rows they want to have for the grids.
 
 */
-
 
 const body = document.querySelector('body');
 const container = document.querySelector('#container');
 const button = document.createElement('button');
 
-
 button.textContent = 'Change grid amount';
-button.addEventListener ('click', changeGrid);
+
 body.appendChild(button);
 body.appendChild(container);
 
-function changeGrid (){
-    let rows = prompt('How many rows?');
-    console.log(Number(rows));
+button.addEventListener ('click', changeGrid) 
+let grids = 16; 
+    game();
+
+ function changeGrid (){
+    grids = prompt('How many rows?', '');
+    grids = Number(grids);
+    if (grids > 100) {
+        grids = 16;
+        game();
+        alert('That is too many rows, pc might explode');
+    } else if (grids <= 100) {
+        game();
+    } else {
+        alert('Something went wrong');
+        grids = 16;
+        game();
+    }
+
+    
+}    
+    
+function game (){
+    for(let i = 0; i < grids * grids; i++) {
+        amount = 960 / grids;
+        let divs = document.createElement('div');
+        divs.className = 'divs'
+        divs.style.width = `${amount}px`;
+        divs.style.height = `${amount}px`;
+        divs.addEventListener('mouseover', ((touch) => divs.style.backgroundColor = 'white'));
+        container.appendChild(divs);
+        button.addEventListener ('click', ((rem) => divs.remove()));          
+    }
 }
-
-
-
-
-for(let i = 0; i < 256; i++) {
-    const divs = document.createElement('div');
-    divs.className = 'divs'
-    divs.addEventListener('mouseover', ((touch) => divs.style.backgroundColor = 'white'));
-    container.appendChild(divs);
-}
-
-
-
-
-
-
-
-
-
-
