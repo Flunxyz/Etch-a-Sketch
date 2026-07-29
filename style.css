@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(27, 27, 27);
+    color: white;
+}
+#container{
+    display: flex;
+    width: 960px;
+    height: 960px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    
+}
+.divs {
+    width: 60px;
+    height:60px;
+    border: 1px solid red;
+}
