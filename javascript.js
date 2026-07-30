@@ -21,7 +21,6 @@ to select the amount of rows they want to have for the grids.
 const body = document.querySelector('body');
 const container = document.querySelector('#container');
 const button = document.createElement('button');
-
 button.textContent = 'Change grid amount';
 
 body.appendChild(button);
@@ -30,34 +29,29 @@ body.appendChild(container);
 button.addEventListener ('click', changeGrid) 
 let grids = 16; 
     game();
-
  function changeGrid (){
     grids = prompt('How many rows?', '');
     grids = Number(grids);
+   
     if (grids > 100) {
         grids = 16;
-        game();
         alert('That is too many rows, pc might explode');
-    } else if (grids <= 100) {
-        game();
-    } else {
+    } else if (grids <= 100 && grids < 0) {
+    } else if (grids === '' || grids === 0 ){
         alert('Something went wrong');
-        grids = 16;
-        game();
-    }
-
-    
-}    
-    
+        grids = 16;  
+    } game(); 
+}     
 function game (){
+container.replaceChildren('')
     for(let i = 0; i < grids * grids; i++) {
         amount = 960 / grids;
         let divs = document.createElement('div');
         divs.className = 'divs'
         divs.style.width = `${amount}px`;
         divs.style.height = `${amount}px`;
-        divs.addEventListener('mouseover', ((touch) => divs.style.backgroundColor = 'white'));
-        container.appendChild(divs);
-        button.addEventListener ('click', ((rem) => divs.remove()));          
+        divs.addEventListener('mouseover', (() => divs.style.backgroundColor = 'white'));
+        container.appendChild(divs); 
     }
 }
+
