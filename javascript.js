@@ -50,7 +50,14 @@ container.replaceChildren('')
         divs.className = 'divs'
         divs.style.width = `${amount}px`;
         divs.style.height = `${amount}px`;
-        divs.addEventListener('mouseover', (() => divs.style.backgroundColor = 'white'));
+        divs.addEventListener('mouseover', (() => {
+            let red = Math.round(Math.random() * 255);
+            let green = Math.round(Math.random() * 255);
+            let blue = Math.round(Math.random() * 255);
+
+            divs.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+            console.log(red, green, blue)
+        }));
         container.appendChild(divs); 
     }
 }
