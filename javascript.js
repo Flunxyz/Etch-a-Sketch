@@ -19,46 +19,61 @@ to select the amount of rows they want to have for the grids.
 */
 
 const body = document.querySelector('body');
+const span = document.createElement('span');
 const container = document.querySelector('#container');
 const button = document.createElement('button');
 button.textContent = 'Change grid amount';
 
-body.appendChild(button);
+span.appendChild(button);
+body.appendChild(span);
 body.appendChild(container);
+button.addEventListener ('click', changeRowAmount);
+let containerWidth = 960;
+container.style.width = `${containerWidth}px`;
 
-button.addEventListener ('click', changeGrid) 
-let grids = 16; 
-    game();
- function changeGrid (){
-    grids = prompt('How many rows?', '');
-    grids = Number(grids);
-   
-    if (grids > 100) {
-        grids = 16;
+let rows = 16; 
+game();
+
+container.addEventListener('mouseover', color);
+
+function color(event) {
+    if (event.currentTarget === 'div') {
+        console.log('da')
+    }
+    event.target.style.backgroundColor = backgroundChange();
+    event.currentTarget.style.backgroundColor = 'rgb(27, 27, 27)';
+}
+
+function random(number) {
+   return Math.floor(Math.random() * number)
+}
+function backgroundChange (){
+    const col = `rgb(${random(255)} ${random(255)} ${random(255)})`;
+    return col;
+}
+function changeRowAmount (){
+    rows = prompt('How many rows?', '');
+    rows = Number(rows);
+    if (rows > Math.floor(rows)) {
+        alert('No decimal points')
+        rows = 16;
+    }
+    else if(rows > 100) {
+        rows = 16;
         alert('That is too many rows, pc might explode');
-    } else if (grids <= 100 && grids < 0) {
-    } else if (grids === '' || grids === 0 ){
+    } else if (rows > 0) {
+    } else {
         alert('Something went wrong');
-        grids = 16;  
+        rows = 16;  
     } game(); 
 }     
 function game (){
-container.replaceChildren('')
-    for(let i = 0; i < grids * grids; i++) {
-        amount = 960 / grids;
-        let divs = document.createElement('div');
-        divs.className = 'divs'
-        divs.style.width = `${amount}px`;
-        divs.style.height = `${amount}px`;
-        divs.addEventListener('mouseover', (() => {
-            let red = Math.round(Math.random() * 255);
-            let green = Math.round(Math.random() * 255);
-            let blue = Math.round(Math.random() * 255);
-
-            divs.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
-            console.log(red, green, blue)
-        }));
-        container.appendChild(divs); 
+   let amount = containerWidth / rows;
+    container.replaceChildren();
+    for(let i = 0; i < rows * rows; i++) {
+        let grid = document.createElement('div');
+        grid.style.width = `${amount}px`;
+        grid.style.height = `${amount}px`;
+        container.appendChild(grid);
     }
 }
-
