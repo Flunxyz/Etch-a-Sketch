@@ -32,19 +32,24 @@ let containerWidth = 960;
 container.style.width = `${containerWidth}px`;
 
 let rows = 16; 
+
 game();
 
 container.addEventListener('mouseover', color);
 
 function color(event) {
-   if(event.currentTarget !== event.target) {
+   
+    if(event.currentTarget !== event.target) {
+        if (Number(event.target.dataset.count) < 10) {
+            let dataCount = Number(event.target.dataset.count) +1;
+            event.target.dataset.count = dataCount;
+            event.target.style.opacity = event.target.dataset.count / 10;
+    }
     event.target.style.backgroundColor = backgroundChange();
    } else {
     event.currentTarget.style.backgroundColor = 'rgb(27, 27, 27)';
    }
 }
-container.dataset.justANumber = '2';
-console.log(container.dataset.justANumber === '2')
 
 function random(number) {
    return Math.floor(Math.random() * number)
@@ -71,11 +76,14 @@ function changeRowAmount (){
 }     
 function game (){
    let amount = containerWidth / rows;
+  
     container.replaceChildren();
     for(let i = 0; i < rows * rows; i++) {
         let grid = document.createElement('div');
+        grid.dataset.count = 0;
         grid.style.width = `${amount}px`;
         grid.style.height = `${amount}px`;
         container.appendChild(grid);
-    }
+        
+    } 
 }
