@@ -37,12 +37,14 @@ game();
 container.addEventListener('mouseover', color);
 
 function color(event) {
-    if (event.currentTarget === 'div') {
-        console.log('da')
-    }
+   if(event.currentTarget !== event.target) {
     event.target.style.backgroundColor = backgroundChange();
+   } else {
     event.currentTarget.style.backgroundColor = 'rgb(27, 27, 27)';
+   }
 }
+container.dataset.justANumber = '2';
+console.log(container.dataset.justANumber === '2')
 
 function random(number) {
    return Math.floor(Math.random() * number)

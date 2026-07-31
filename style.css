@@ -9,4 +9,5 @@ body {
     flex-wrap: wrap;
     align-items: flex-start;
     border:white 2px solid;
+    padding:20px;
 }
